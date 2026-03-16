@@ -13,7 +13,7 @@
     <title>Github Issue Tracker</title>
 </head>
 <body class="bg-[#F8FAFC] min-h-screen">
-    <div id="form-container" class="flex justify-center items-center">
+    <div id="login-container" class="flex justify-center items-center">
         <fieldset class="fieldset bg-[#ffffff] border-base-300 rounded-box border p-8 h-[743px] w-[520px] flex flex-col gap-6 justify-center items-center shadow-2xl my-16 mx-60">
 
             <img src="assets/github-logo.png" alt="">
@@ -25,17 +25,17 @@
 
             <div class="w-full">
                 <label class="label text-[16px] text-black font-medium">Username</label>
-                <input type="text" class="input w-full" placeholder="Enter Username" />
+                <input type="text" id="input-name" class="w-full" placeholder="Enter Username" />
                 <p class="text-[#4A00FF]">Default: admin</p>
             </div>
 
             <div class="w-full">
                 <label class="label text-[16px] text-black font-medium">Password</label>
-                <input type="password" class="input w-full" placeholder="Enter Password" />
+                <input type="password" id="input-pass" class="w-full" placeholder="Enter Password" />
                 <p class="text-[#4A00FF]">Default: admin123</p>
             </div>
 
-            <button class="btn btn-primary mt-4 w-full rounded-lg">Sign In</button>
+            <button id="submit" class="btn btn-primary mt-4 w-full rounded-lg">Sign In</button>
 
             <div class="flex items-center w-full">
               <div class="flex-1 h-px bg-gray-300"></div>
@@ -53,9 +53,13 @@
                 </div>
 
             </div>
-        </fieldset>
 
-        
+        </fieldset>
+    </div>
+
+    <div id="main-page-container">
+
+        <h1 class="text-4xl">hello</h1>
 
     </div>
 
@@ -70,5 +74,6 @@
       </div>
       <label class="modal-backdrop" for="my_modal_7">Close</label>
     </div> -->
+    <script src="backend.js"></script>
 </body>
 </html>
