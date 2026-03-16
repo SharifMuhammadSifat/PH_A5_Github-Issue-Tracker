@@ -12,12 +12,56 @@
 
     <title>Github Issue Tracker</title>
 </head>
-<body>
-    <h1 class="text-3xl geist">hello</h1>
+<body class="bg-[#F8FAFC] min-h-screen">
+    <div id="form-container" class="flex justify-center items-center">
+        <fieldset class="fieldset bg-[#ffffff] border-base-300 rounded-box border p-8 h-[743px] w-[520px] flex flex-col gap-6 justify-center items-center shadow-2xl my-16 mx-60">
 
-    <label for="my_modal_7" class="btn">open modal</label>
+            <img src="assets/github-logo.png" alt="">
+
+            <div>
+                <h1 class="text-2xl font-semibold text-[#1F2937]">GitHub Issues Tracker</h1>
+                <p class="text-[16px] text-[#64748B]">Sign in to manage your issues</p>
+            </div>
+
+            <div class="w-full">
+                <label class="label text-[16px] text-black font-medium">Username</label>
+                <input type="text" class="input w-full" placeholder="Enter Username" />
+                <p class="text-[#4A00FF]">Default: admin</p>
+            </div>
+
+            <div class="w-full">
+                <label class="label text-[16px] text-black font-medium">Password</label>
+                <input type="password" class="input w-full" placeholder="Enter Password" />
+                <p class="text-[#4A00FF]">Default: admin123</p>
+            </div>
+
+            <button class="btn btn-primary mt-4 w-full rounded-lg">Sign In</button>
+
+            <div class="flex items-center w-full">
+              <div class="flex-1 h-px bg-gray-300"></div>
+              <span class="px-4 text-black-500">OR</span>
+              <div class="flex-1 h-px bg-gray-300"></div>
+            </div>
+
+            <div class="w-full flex flex-col items-center">
+                <p class="text-[#64748B]">Demo Credentials:</p>
+
+                <div class="w-full bg-[#F8FAFC] flex flex-col justify-center items-center p-6">
+
+                    <div><span class="font-semibold text-[16px]">Username:</span> <span class="text-[16px]">admin</span></div>
+                    <div><span class="font-semibold text-[16px]">Password:</span><span class="text-[16px]">admin123</span></div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        
+
+    </div>
 
     
+    <!-- <label for="my_modal_7" class="btn">open modal</label>
+
     <input type="checkbox" id="my_modal_7" class="modal-toggle" />
     <div class="modal" role="dialog">
       <div class="modal-box">
@@ -25,6 +69,6 @@
         <p class="py-4">This modal works with a hidden checkbox!</p>
       </div>
       <label class="modal-backdrop" for="my_modal_7">Close</label>
-    </div>
+    </div> -->
 </body>
 </html>
