@@ -6,7 +6,7 @@ const submitBtn = document.getElementById("submit");
 
 
 
-mainPage.classList.add("hidden")
+// mainPage.classList.add("hidden")
 
 
 

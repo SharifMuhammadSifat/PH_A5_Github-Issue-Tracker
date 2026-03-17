@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +14,7 @@
     <title>Github Issue Tracker</title>
 </head>
 <body class="bg-[#F8FAFC] min-h-screen">
-    <div id="login-container" class="flex justify-center items-center">
+    <div id="login-container" class="flex justify-center items-center hidden">
         <fieldset class="fieldset bg-[#ffffff] border-base-300 rounded-box border p-8 h-[743px] w-[520px] flex flex-col gap-6 justify-center items-center shadow-2xl my-16 mx-60">
 
             <img src="assets/github-logo.png" alt="">
@@ -57,9 +58,20 @@
         </fieldset>
     </div>
 
-    <div id="main-page-container">
+    <div id="main-page-container" class="w-full h-20 bg-white">
 
-        <h1 class="text-4xl">hello</h1>
+        <nav class="flex justify-between items-center px-20 py-4 shadow">
+            <div class="logo flex gap-1">
+                <img src="assets/github-logo.png" class="w-9 h-9" alt="">
+                <p class="text-2xl font-semibold">GitHub Issues Tracker</p>
+            </div>
+
+            <div class="search flex items-center gap-1 relative">
+                <span class="absolute translate-x-1 translate-y-px"><i class="fa-brands fa-sistrix fa-sm" style="color: rgb(181, 190, 198);"></i></span>
+                <input type="text" class="w-75 h-11 border-2 border-gray-300 rounded-lg p-2.5" placeholder="   Search Issue">
+                <button class="btn btn-primary text-white"><i class="fa-solid fa-plus fa-sm" style="color: rgb(255, 255, 255);"></i>New Issue</button>
+            </div>
+        </nav>
 
     </div>
 
