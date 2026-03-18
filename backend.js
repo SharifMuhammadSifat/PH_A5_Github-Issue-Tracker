@@ -11,7 +11,7 @@ const closeTabBtn = document.getElementById("close-btn");
 
 
 
-// mainPage.classList.add("hidden");
+mainPage.classList.add("hidden");
 
 
 const loginAuth = (u,p) => {
@@ -34,13 +34,10 @@ allTabBtn.addEventListener("click", () => {
         
     allTabBtn.classList.add("btn-primary", "text-white");
     allTabBtn.classList.remove("text-gray-500");
-
     openTabBtn.classList.remove("text-white");
     openTabBtn.classList.add("text-gray-500");
-    
     closeTabBtn.classList.remove("text-white");
     closeTabBtn.classList.add("text-gray-500");
-    
     openTabBtn.classList.remove("btn-primary");
     closeTabBtn.classList.remove("btn-primary");
     allTab.classList.remove("hidden");
@@ -57,10 +54,8 @@ openTabBtn.addEventListener("click", () => {
 
     openTabBtn.classList.add("btn-primary", "text-white");
     openTabBtn.classList.remove("text-gray-500");
-    
     allTabBtn.classList.remove("text-white");
     allTabBtn.classList.add("text-gray-500");
-
     closeTabBtn.classList.remove("text-white");
     closeTabBtn.classList.add("text-gray-500")
     allTabBtn.classList.remove("btn-primary");
@@ -78,25 +73,15 @@ closeTabBtn.addEventListener("click", () => {
     const openTab = document.getElementById("open-tab");
     const closeTab = document.getElementById("close-tab");
 
-        closeTabBtn.classList.add("btn-primary", "text-white");
-        closeTabBtn.classList.remove("text-gray-500");
-
-        allTabBtn.classList.remove("text-white");
-        allTabBtn.classList.add("text-gray-500");
-
-        openTabBtn.classList.remove("text-white");
-        openTabBtn.classList.add("text-gray-500");
-        
-
-        openTabBtn.classList.remove("btn-primary");
-        allTabBtn.classList.remove("btn-primary");
-
-        closeTab.classList.remove("hidden");
-
-        allTab.classList.add("hidden");
-
-        openTab.classList.add("hidden");
-
-    
-
+    closeTabBtn.classList.add("btn-primary", "text-white");
+    closeTabBtn.classList.remove("text-gray-500");
+    allTabBtn.classList.remove("text-white");
+    allTabBtn.classList.add("text-gray-500");
+    openTabBtn.classList.remove("text-white");
+    openTabBtn.classList.add("text-gray-500");
+    openTabBtn.classList.remove("btn-primary");
+    allTabBtn.classList.remove("btn-primary");
+    closeTab.classList.remove("hidden");
+    allTab.classList.add("hidden");
+    openTab.classList.add("hidden");
 })

@@ -14,7 +14,7 @@
     <title>Github Issue Tracker</title>
 </head>
 <body class="bg-[#F8FAFC] min-h-screen">
-    <div id="login-container" class="flex justify-center items-center">
+    <div id="login-container" class="flex justify-center items-center"> 
         <fieldset class="fieldset bg-[#ffffff] border-base-300 rounded-box border p-8 h-[743px] w-[520px] flex flex-col gap-6 justify-center items-center shadow-2xl my-16 mx-60">
 
             <img src="assets/github-logo.png" alt="">
@@ -73,28 +73,51 @@
             </div>
         </nav>
 
-        <section class="px-61 py-15 w-full">
+        <section class="px-61 py-15 w-full flex flex-col gap-4">
             <div class="button-container w-full h-22 bg-white p-6 flex gap-2">
                 <button id="all-btn" class="btn btn-primary h-10 w-30 text-white">All</button>
                 <button id="open-btn" class="btn h-10 w-30 text-gray-500">Open</button>
                 <button id="close-btn" class="btn h-10 w-30 text-gray-500">Closed</button>
             </div>
-            <section>
-                <div id="all-tab" class="">
-                    all
+            <div class=" bg-[#FBFBFB]">
+                <div class="w-full flex justify-between items-center p-6 border-b border-gray-300">
+                    <div class="flex gap-2">
+                        <img src="assets/Aperture.png" class="w-12.5 h-12.5" alt="">
+                        <div>
+                            <p class="mb-[3px] font-semibold text-2xl"><span id="count">0</span> Issues</p>
+                            <p class="text-[1rem] text-[#64748B]">Track and manage your project issues</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                            <p class="font-medium text-[1rem]"><i class="fa-solid fa-circle" style="color: #00a96e;"></i> Open</p>
+                            <p class="font-medium text-[1rem]"><i class="fa-solid fa-circle" style="color: #a855f7;"></i> Closed</p>
+                    </div>
                 </div>
+                <div class="p-6">
+                    <div id="all-tab" class="">
+                        <div class="bg-white p-2.5 border-t-2 border-green-500 rounded-2xl">
+                            <div class="flex justify-between align-middle">
+                                <img src="assets/Open-Status.png" class="w-6 h-6" alt="">
+                                <div class="h-6 w-20 bg-[#FEECEC] rounded-full">
+                                    <p class="text-[#EF4444] text-center">HIGH</p>
+                                </div>
+                            </div>
 
-                <div id="open-tab" class="hidden">
-                    open
-                </div>
 
-                <div id="close-tab" class="hidden">
-                    close
+                        </div>
+                    </div>
+
+                    <div id="open-tab" class="hidden">
+                        open
+                    </div>
+
+                    <div id="close-tab" class="hidden">
+                        close
+                    </div>
                 </div>
-            </section>
+            </div>
         </section>
-
-        
 
     </div>
 
