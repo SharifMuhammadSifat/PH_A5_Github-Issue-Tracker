@@ -5,9 +5,16 @@ const mainPage = document.getElementById("main-page-container");
 const submitBtn = document.getElementById("submit");
 
 
-const allTabBtn = document.getElementById("all-btn");
-const openTabBtn = document.getElementById("open-btn");
-const closeTabBtn = document.getElementById("close-btn");
+const allBtn = document.getElementById("all-btn");
+const openBtn = document.getElementById("open-btn");
+const closeBtn = document.getElementById("close-btn");
+
+const allTab = document.getElementById("all-tab");
+const openTab = document.getElementById("open-tab");
+const closeTab = document.getElementById("close-tab");
+
+const buttons = [allBtn, openBtn, closeBtn];
+const tabs = [allTab, openTab, closeTab];
 
 
 
@@ -26,62 +33,58 @@ submitBtn.addEventListener("click", () => {
 });
 
 
-allTabBtn.addEventListener("click", () => {
-    const allTab = document.getElementById("all-tab");
-    const openTab = document.getElementById("open-tab");
-    const closeTab = document.getElementById("close-tab");
+//<div class="shadow rounded-2xl  border-t-2 border-green-500 overflow-hidden">
+//
+//                            <!-- Top Section -->
+//                            <div class="bg-white p-2.5">
+//                                <div class="flex justify-between items-center">
+//                                    <img src="assets/Open-Status.png" class="w-6 h-6" alt="">
+//
+//                                    <div class="h-6 w-20 bg-[#FEECEC] rounded-full flex items-center justify-center">
+//                                        <p class="text-[#EF4444] text-sm">HIGH</p>
+//                                    </div>
+//                                </div>
+//                            
+//                                <div class="flex flex-col gap-2 mt-2"> 
+//                                    <p class="font-semibold text-[14px] text-[#1F2937]">demo text</p>
+//                                    <p class="text-[#64748B] text-[12px]">demo text</p>
+//                                </div>
+//                            
+//                                <div class="issue-labels mt-2">
+//                                    <!-- labels here -->
+//                                </div>
+//                            </div>
+//                            
+//                            <!-- Divider -->
+//                            <div class="border-t border-gray-300"></div>
+//                        
+//                            <!-- Bottom Section -->
+//                            <div class="bg-white p-2.5">
+//                                <p class="text-[#64748B] text-[12px]">
+//                                    programmer <br>date
+//                                </p>
+//                            </div>
+//
+//                        </div>
 
-        
-    allTabBtn.classList.add("btn-primary", "text-white");
-    allTabBtn.classList.remove("text-gray-500");
-    openTabBtn.classList.remove("text-white");
-    openTabBtn.classList.add("text-gray-500");
-    closeTabBtn.classList.remove("text-white");
-    closeTabBtn.classList.add("text-gray-500");
-    openTabBtn.classList.remove("btn-primary");
-    closeTabBtn.classList.remove("btn-primary");
-    allTab.classList.remove("hidden");
-    closeTab.classList.add("hidden");
-    openTab.classList.add("hidden");
 
+function switchTab(activeBtn, activeTab) {
 
-})
+    buttons.forEach(btn => {
+        btn.classList.remove("btn-primary", "text-white");
+        btn.classList.add("text-gray-500");
+    });
 
-openTabBtn.addEventListener("click", () => {
-    const allTab = document.getElementById("all-tab");
-    const openTab = document.getElementById("open-tab");
-    const closeTab = document.getElementById("close-tab");
+    tabs.forEach(tab => {
+        tab.classList.add("hidden");
+    });
 
-    openTabBtn.classList.add("btn-primary", "text-white");
-    openTabBtn.classList.remove("text-gray-500");
-    allTabBtn.classList.remove("text-white");
-    allTabBtn.classList.add("text-gray-500");
-    closeTabBtn.classList.remove("text-white");
-    closeTabBtn.classList.add("text-gray-500")
-    allTabBtn.classList.remove("btn-primary");
-    closeTabBtn.classList.remove("btn-primary");
-    openTab.classList.remove("hidden");
-    closeTab.classList.add("hidden");
-    allTab.classList.add("hidden");
-    
-    
+    activeBtn.classList.add("btn-primary", "text-white");
+    activeBtn.classList.remove("text-gray-500");
 
-})
+    activeTab.classList.remove("hidden");
+}
 
-closeTabBtn.addEventListener("click", () => {
-    const allTab = document.getElementById("all-tab");
-    const openTab = document.getElementById("open-tab");
-    const closeTab = document.getElementById("close-tab");
-
-    closeTabBtn.classList.add("btn-primary", "text-white");
-    closeTabBtn.classList.remove("text-gray-500");
-    allTabBtn.classList.remove("text-white");
-    allTabBtn.classList.add("text-gray-500");
-    openTabBtn.classList.remove("text-white");
-    openTabBtn.classList.add("text-gray-500");
-    openTabBtn.classList.remove("btn-primary");
-    allTabBtn.classList.remove("btn-primary");
-    closeTab.classList.remove("hidden");
-    allTab.classList.add("hidden");
-    openTab.classList.add("hidden");
-})
+allBtn.addEventListener("click", () => switchTab(allBtn, allTab));
+openBtn.addEventListener("click", () => switchTab(openBtn, openTab));
+closeBtn.addEventListener("click", () => switchTab(closeBtn, closeTab));
