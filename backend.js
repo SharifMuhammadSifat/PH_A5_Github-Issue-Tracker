@@ -16,7 +16,7 @@ const closeTab = document.getElementById("close-tab");
 const buttons = [allBtn, openBtn, closeBtn];
 const tabs = [allTab, openTab, closeTab];
 
-
+let data_arr = null;
 
 mainPage.classList.add("hidden");
 
@@ -57,6 +57,68 @@ const badgeHandler = (arr) => {
     return badges
 }
 
+const displayIssue = (issue_obj, newElem) => {
+            newElem.innerHTML = `
+            <div class="bg-white p-2.5">
+                <div class="flex justify-between items-center">
+                    <img src="${issue_obj.status === "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" class="w-6 h-6" alt="">
+                    <div class="h-6 w-20 rounded-full flex items-center justify-center ${issue_obj.priority === "high" ? "bg-[#FEECEC]" : issue_obj.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
+                        <p class="${issue_obj.priority === "high" ? "text-red-500" : issue_obj.priority === "medium" ? 
+                            "text-yellow-500" : "text-gray-500"} text-sm font-medium">${issue_obj.priority.toUpperCase()}</p>
+                    </div>
+                </div>
+                        
+                <div class="flex flex-col gap-2 mt-2"> 
+                    <p class="font-semibold text-[14px] text-[#1F2937]">${issue_obj.title}</p>
+                    <p class="text-[#64748B] text-[12px]">${issue_obj.description}</p>
+                </div>
+                        
+                <div class="issue-labels mt-2">
+                    <div class="flex flex-col gap-1 2xl:flex-row ">${badgeHandler(issue_obj.labels)}</div>
+                </div>
+            </div>
+                        
+            <div class="border-t border-gray-300"></div>
+                        
+            <div class="bg-white p-2.5">
+                <p class="text-[#64748B] text-[12px]">
+                    ${issue_obj.author} <br>${issue_obj.createdAt}
+                </p>
+            </div>
+            `;
+            return newElem
+}
+
+const displayClosedIssue = (arr) => {
+    closeTab.innerHTML = "";
+    for (let issue of arr) {
+        if (issue.status !== "closed"){
+            continue;
+        }
+        let newIssue = document.createElement("div");
+        newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-purple-500", "overflow-hidden");
+        displayIssue(issue, newIssue);
+        closeTab.append(newIssue);
+    }
+
+}
+
+const displayOpenIssue = (arr) => {
+    openTab.innerHTML = "";
+    for (let issue of arr) {
+        
+        
+        if (issue.status !== "open"){
+            continue
+        }
+        let newIssue = document.createElement("div");
+        newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-green-500", "overflow-hidden");
+        displayIssue(issue, newIssue);
+        openTab.append(newIssue);
+    }
+
+}
+
 const displayAllIssue = (arr) => {
     allTab.innerHTML = "";
     for (let issue of arr) {
@@ -68,38 +130,12 @@ const displayAllIssue = (arr) => {
         else {
             newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-purple-500", "overflow-hidden");
         }
-        newIssue.innerHTML = `
-            <div class="bg-white p-2.5">
-                <div class="flex justify-between items-center">
-                    <img src="${issue.status === "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" class="w-6 h-6" alt="">
-                    <div class="h-6 w-20 rounded-full flex items-center justify-center ${issue.priority === "high" ? "bg-[#FEECEC]" : issue.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
-                        <p class="${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? 
-                            "text-yellow-500" : "text-gray-500"} text-sm font-medium">${issue.priority.toUpperCase()}</p>
-                    </div>
-                </div>
-            
-                <div class="flex flex-col gap-2 mt-2"> 
-                    <p class="font-semibold text-[14px] text-[#1F2937]">${issue.title}</p>
-                    <p class="text-[#64748B] text-[12px]">${issue.description}</p>
-                </div>
-            
-                <div class="issue-labels mt-2">
-                    <div class="flex flex-col gap-1 2xl:flex-row ">${badgeHandler(issue.labels)}</div>
-                </div>
-            </div>
-            
-
-            <div class="border-t border-gray-300"></div>
-        
-            <div class="bg-white p-2.5">
-                <p class="text-[#64748B] text-[12px]">
-                    ${issue.author} <br>${issue.createdAt}
-                </p>
-            </div>
-        `;
+        displayIssue(issue, newIssue);
         allTab.append(newIssue);
     }
 }
+
+
 
 const loginAuth = (u,p) => {
     if ((u === "admin") && (p === "admin123")) {
@@ -107,16 +143,18 @@ const loginAuth = (u,p) => {
         mainPage.classList.remove("hidden");
         fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then((res) => res.json())
-        .then((issue_obj) => displayAllIssue(issue_obj.data));
+        .then((issue_obj) => {
+            data_arr = issue_obj.data
+            displayAllIssue(data_arr);
+        })
+        
     }
 }
 
 
 
-submitBtn.addEventListener("click", (event) => {
-    // event.preventDefault();
-    loginAuth(username.value, password.value)
-    
+submitBtn.addEventListener("click", () => {
+    loginAuth(username.value, password.value);
 });
 
 
@@ -140,11 +178,19 @@ function switchTab(activeBtn, activeTab) {
 }
 
 allBtn.addEventListener("click", () => {
-    switchTab(allBtn, allTab)
+    switchTab(allBtn, allTab);
+    displayAllIssue(data_arr);
 
 });
 
 
 
-openBtn.addEventListener("click", () => {switchTab(openBtn, openTab)});
-closeBtn.addEventListener("click", () => {switchTab(closeBtn, closeTab)});
+openBtn.addEventListener("click", () => {
+    switchTab(openBtn, openTab);
+    displayOpenIssue(data_arr);
+
+});
+closeBtn.addEventListener("click", () => {
+    switchTab(closeBtn, closeTab);
+    displayClosedIssue(data_arr);
+});
