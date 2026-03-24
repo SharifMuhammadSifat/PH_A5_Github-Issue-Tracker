@@ -20,6 +20,43 @@ const tabs = [allTab, openTab, closeTab];
 
 mainPage.classList.add("hidden");
 
+const badgeHandler = (arr) => {
+    let badges = ""
+    for (let badge of arr){
+        if (badge === "bug"){
+            badges += `<span class="px-3 py-1 text-sm rounded-full bg-red-100 text-[#db1616ff]">
+                                <i class="fa-solid fa-bug" style="color: #db1616;"></i> BUG
+                        </span> `;
+        }
+
+        else if (badge === "help wanted"){
+            badges += `<span class="px-3 py-1 text-sm rounded-full bg-orange-100 text-[#db7900ff]">
+                            <i class="fa-solid fa-life-ring" style="color: rgb(219, 122, 0);"></i> HELP WANTED
+                        </span> `;
+        }
+
+        else if (badge === "good first issue"){
+            badges += `<span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-purple-100 text-[#ac56bfff]">
+                           <i class="fa-solid fa-circle-exclamation" style="color: #ac56bf;"></i> GOOD FIRST ISSUE
+                        </span>`;
+        }
+
+        else if (badge === "documentation"){
+            badges += `<span class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-blue-100 text-[#5689bf]">
+                        <i class="fa-brands fa-readme" style="color: #5689bf;"></i>  DOCUMENTATION
+                    </span>`
+        }
+
+        else{
+            badges += `<span class="px-3 py-1 text-sm rounded-full bg-green-100 text-[#1adb00ff]">
+                            <i class="fa-regular fa-star" style="color: #1adb00;"></i> ENHANCEMENT
+                        </span> `;
+        }
+    }
+
+    return badges
+}
+
 const displayAllIssue = (arr) => {
     allTab.innerHTML = "";
     for (let issue of arr) {
@@ -36,7 +73,8 @@ const displayAllIssue = (arr) => {
                 <div class="flex justify-between items-center">
                     <img src="${issue.status === "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" class="w-6 h-6" alt="">
                     <div class="h-6 w-20 rounded-full flex items-center justify-center ${issue.priority === "high" ? "bg-[#FEECEC]" : issue.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
-                        <p class="${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? "text-yellow-500" : "text-gray-500"} text-sm">${issue.priority}</p>
+                        <p class="${issue.priority === "high" ? "text-red-500" : issue.priority === "medium" ? 
+                            "text-yellow-500" : "text-gray-500"} text-sm font-medium">${issue.priority.toUpperCase()}</p>
                     </div>
                 </div>
             
@@ -46,7 +84,7 @@ const displayAllIssue = (arr) => {
                 </div>
             
                 <div class="issue-labels mt-2">
-                    <p>${issue.labels.join(" ")}</p>
+                    <p>${badgeHandler(issue.labels)}</p>
                 </div>
             </div>
             
