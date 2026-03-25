@@ -1,0 +1,5 @@
+1) var is function scoped let and const are block scoped
+2)used for unpacking array and object
+3)map applies the provided function on all elements of array, filter returns an arry with the elements which satify given condition, forEach loops through the elements
+4)just a shorter way of declaring a function
+5)this is a different way of writting strings which offer more functionality
