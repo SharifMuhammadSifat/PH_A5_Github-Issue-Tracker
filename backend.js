@@ -18,6 +18,8 @@ const tabs = [allTab, openTab, closeTab];
 
 let data_arr = null;
 
+const modalBox = document.getElementById("modal-text");
+
 mainPage.classList.add("hidden");
 
 const badgeHandler = (arr) => {
@@ -57,7 +59,7 @@ const badgeHandler = (arr) => {
     return badges
 }
 
-const modalBox = document.getElementById("modal-text");
+
 
 const modalHandler = (issue_obj) => {
     modalBox.innerHTML = "";
@@ -137,38 +139,45 @@ const displayIssue = (issue_obj, newElem) => {
             return newElem
 }
 
+const issueCount = document.getElementById("count");
+
 const displayClosedIssue = (arr) => {
     closeTab.innerHTML = "";
+    let count = 0
     for (let issue of arr) {
         if (issue.status !== "closed"){
             continue;
         }
+        count += 1;
         let newIssue = document.createElement("div");
         newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-purple-500", "overflow-hidden");
         displayIssue(issue, newIssue);
         closeTab.append(newIssue);
     }
-
+    issueCount.innerHTML = String(count);
 }
 
 const displayOpenIssue = (arr) => {
     openTab.innerHTML = "";
+    let count = 0
     for (let issue of arr) {
         
         
         if (issue.status !== "open"){
             continue
         }
+        count += 1;
         let newIssue = document.createElement("div");
         newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-green-500", "overflow-hidden");
         displayIssue(issue, newIssue);
         openTab.append(newIssue);
     }
-
+    issueCount.innerHTML = String(count);
 }
 
 const displayAllIssue = (arr) => {
     allTab.innerHTML = "";
+    let count = 0
     for (let issue of arr) {
         let newIssue = document.createElement("div");
         
@@ -178,9 +187,11 @@ const displayAllIssue = (arr) => {
         else {
             newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-purple-500", "overflow-hidden");
         }
+        count += 1;
         displayIssue(issue, newIssue);
         allTab.append(newIssue);
     }
+    issueCount.innerHTML = String(count);
 }
 
 
