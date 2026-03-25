@@ -63,9 +63,16 @@ const badgeHandler = (arr) => {
     return badges
 }
 
+const spinner = document.getElementById("spinner");
 
-
-
+const manageSpinner = (flag) => {
+    if (flag){
+        spinner.classList.remove("hidden")
+    }
+    else {
+        spinner.classList.add("hidden")
+    }
+}
 
 
 
@@ -151,6 +158,7 @@ const displayIssue = (issue_obj, newElem) => {
 const issueCount = document.getElementById("count");
 
 const displayClosedIssue = (arr) => {
+    manageSpinner(true);
     closeTab.innerHTML = "";
     let count = 0
     for (let issue of arr) {
@@ -163,10 +171,12 @@ const displayClosedIssue = (arr) => {
         displayIssue(issue, newIssue);
         closeTab.append(newIssue);
     }
+    manageSpinner(false);
     issueCount.innerHTML = String(count);
 }
 
 const displayOpenIssue = (arr) => {
+    manageSpinner(true);
     openTab.innerHTML = "";
     let count = 0
     for (let issue of arr) {
@@ -181,10 +191,12 @@ const displayOpenIssue = (arr) => {
         displayIssue(issue, newIssue);
         openTab.append(newIssue);
     }
+    manageSpinner(false);
     issueCount.innerHTML = String(count);
 }
 
 const displayAllIssue = (arr) => {
+    manageSpinner(true);
     allTab.innerHTML = "";
     let count = 0
     for (let issue of arr) {
@@ -200,6 +212,7 @@ const displayAllIssue = (arr) => {
         displayIssue(issue, newIssue);
         allTab.append(newIssue);
     }
+    manageSpinner(false);
     issueCount.innerHTML = String(count);
 }
 
@@ -272,6 +285,7 @@ const displaySearchIssue = (arr) => {
         searchTab.innerHTML = `<h1 class="text-2xl font-bold w-full">No issue found!</h1>`;
         return
     }
+    manageSpinner(true);
     searchTab.innerHTML = ``;
     let count = 0
     for (let issue of arr) {
@@ -287,6 +301,7 @@ const displaySearchIssue = (arr) => {
         displayIssue(issue, newIssue);
         searchTab.append(newIssue);
     }
+    manageSpinner(false);
     issueCount.innerHTML = String(count);    
 }
 
