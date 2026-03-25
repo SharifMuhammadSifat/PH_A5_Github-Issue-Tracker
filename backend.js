@@ -24,31 +24,31 @@ const badgeHandler = (arr) => {
     let badges = ""
     for (let badge of arr){
         if (badge === "bug"){
-            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-red-100 text-[#db1616ff]">
+            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-red-100 text-[#db1616ff] w-fit">
                                 <i class="fa-solid fa-bug" style="color: #db1616;"></i> BUG
                         </span> `;
         }
 
         else if (badge === "help wanted"){
-            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-orange-100 text-[#db7900ff]">
+            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-orange-100 text-[#db7900ff] w-fit">
                             <i class="fa-solid fa-life-ring" style="color: rgb(219, 122, 0);"></i> HELP WANTED
                         </span> `;
         }
 
         else if (badge === "good first issue"){
-            badges += `<span class="px-2.5 py-0.5 text-[12px] font-semibold rounded-full bg-purple-100 text-[#ac56bfff]">
+            badges += `<span class="px-2.5 py-0.5 text-[12px] font-semibold rounded-full bg-purple-100 text-[#ac56bfff] w-fit">
                            <i class="fa-solid fa-circle-exclamation" style="color: #ac56bf;"></i> GOOD FIRST ISSUE
                         </span>`;
         }
 
         else if (badge === "documentation"){
-            badges += `<span class="px-2.5 py-0.5 text-[12px] font-semibold rounded-full bg-blue-100 text-[#5689bf]">
+            badges += `<span class="px-2.5 py-0.5 text-[12px] font-semibold rounded-full bg-blue-100 text-[#5689bf] w-fit">
                         <i class="fa-brands fa-readme" style="color: #5689bf;"></i>  DOCUMENTATION
                     </span>`
         }
 
         else{
-            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-green-100 text-[#1adb00ff]">
+            badges += `<span class="px-3 py-1 text-[12px] rounded-full bg-green-100 text-[#1adb00ff] w-fit">
                             <i class="fa-regular fa-star" style="color: #1adb00;"></i> ENHANCEMENT
                         </span> `;
         }
@@ -57,34 +57,82 @@ const badgeHandler = (arr) => {
     return badges
 }
 
+const modalBox = document.getElementById("modal-text");
+
+const modalHandler = (issue_obj) => {
+    modalBox.innerHTML = "";
+    modalBox.innerHTML = `
+        <div>
+            <h3 class="text-2xl font-bold">${issue_obj.title}</h3>
+            <div class="text-12px font-normal text-[#64748B]"><span class="${issue_obj.status === "open"? "bg-green-500" : "bg-purple-500"}  rounded-full text-white text-center px-2.5 py-0.5">${issue_obj.status}</span> Openend by ${issue_obj.author} | ${issue_obj.createdAt}</div>
+        </div>
+
+        <div>
+            <div class="flex flex-col gap-1 2xl:flex-row ">${badgeHandler(issue_obj.labels)}</div>
+        </div>
+
+        <div>
+            <p class="text-[16px] text-[#64748B]">${issue_obj.description}</p>
+        </div>
+
+        <div class="bg-[#F8FAFC] grid grid-cols-2">
+            <div>
+                <p class="text-[16px] font-normal text-[#64748B]">Assignee:</p>
+                <h1 class="text-[16px] font-semibold">${issue_obj.assignee === ""? "No Assignee" : issue_obj.assignee}</h1>
+            </div>
+
+            <div class="flex flex-col gap-1.5">
+                <p class="text-[16px] font-normal text-[#64748B]">Priority:</p>
+                <div class="w-fit rounded-full font-medium text-[12px] ${issue_obj.priority === "high" ? "bg-[#FEECEC]" : issue_obj.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
+                            <p class=" ${issue_obj.priority === "high" ? "text-red-500" : issue_obj.priority === "medium" ? 
+                                "text-yellow-500" : "text-gray-500"} text-center px-2.5 py-0.5  ">${issue_obj.priority.toUpperCase()}</div>
+            </div>
+        </div>
+    `;
+
+    console.log("modal active");
+    
+}
+
+const getID = (id) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`)
+        .then((res) => res.json())
+        .then((json) => modalHandler(json.data));
+
+}
+
 const displayIssue = (issue_obj, newElem) => {
             newElem.innerHTML = `
-            <div class="bg-white p-2.5">
-                <div class="flex justify-between items-center">
-                    <img src="${issue_obj.status === "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" class="w-6 h-6" alt="">
-                    <div class="h-6 w-20 rounded-full flex items-center justify-center ${issue_obj.priority === "high" ? "bg-[#FEECEC]" : issue_obj.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
-                        <p class="${issue_obj.priority === "high" ? "text-red-500" : issue_obj.priority === "medium" ? 
-                            "text-yellow-500" : "text-gray-500"} text-sm font-medium">${issue_obj.priority.toUpperCase()}</p>
+            <button class="hover:cursor-pointer" onclick="getID(${issue_obj.id})">
+            <label for="my_modal_7" >
+                <div class="bg-white p-2.5">
+                    <div class="flex justify-between items-center">
+                        <img src="${issue_obj.status === "open" ? "assets/Open-Status.png" : "assets/Closed-Status.png"}" class="w-6 h-6" alt="">
+                        <div class="h-6 w-20 rounded-full flex items-center justify-center ${issue_obj.priority === "high" ? "bg-[#FEECEC]" : issue_obj.priority === "medium" ? "bg-[#faffb4]" : "bg-[#dadada]"}">
+                            <p class="${issue_obj.priority === "high" ? "text-red-500" : issue_obj.priority === "medium" ? 
+                                "text-yellow-500" : "text-gray-500"} text-sm font-medium">${issue_obj.priority.toUpperCase()}</p>
+                        </div>
+                    </div>
+                            
+                    <div class="flex flex-col gap-2 mt-2"> 
+                        <p class="font-semibold text-[14px] text-[#1F2937]">${issue_obj.title}</p>
+                        <p class="text-[#64748B] text-[12px]">${issue_obj.description}</p>
+                    </div>
+                            
+                    <div class="issue-labels mt-2">
+                        <div class="flex flex-col gap-1 2xl:flex-row ">${badgeHandler(issue_obj.labels)}</div>
                     </div>
                 </div>
-                        
-                <div class="flex flex-col gap-2 mt-2"> 
-                    <p class="font-semibold text-[14px] text-[#1F2937]">${issue_obj.title}</p>
-                    <p class="text-[#64748B] text-[12px]">${issue_obj.description}</p>
+                            
+                <div class="border-t border-gray-300"></div>
+                            
+                <div class="bg-white p-2.5">
+                    <p class="text-[#64748B] text-[12px]">
+                        ${issue_obj.author} <br>${issue_obj.createdAt}
+                    </p>
                 </div>
-                        
-                <div class="issue-labels mt-2">
-                    <div class="flex flex-col gap-1 2xl:flex-row ">${badgeHandler(issue_obj.labels)}</div>
-                </div>
-            </div>
-                        
-            <div class="border-t border-gray-300"></div>
-                        
-            <div class="bg-white p-2.5">
-                <p class="text-[#64748B] text-[12px]">
-                    ${issue_obj.author} <br>${issue_obj.createdAt}
-                </p>
-            </div>
+                </label>
+            </button>
             `;
             return newElem
 }
