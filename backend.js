@@ -13,8 +13,12 @@ const allTab = document.getElementById("all-tab");
 const openTab = document.getElementById("open-tab");
 const closeTab = document.getElementById("close-tab");
 
+const searchBtn = document.getElementById("search-btn");
+const searchTxt = document.getElementById("search-box");
+const searchTab = document.getElementById("search-tab");
+
 const buttons = [allBtn, openBtn, closeBtn];
-const tabs = [allTab, openTab, closeTab];
+const tabs = [allTab, openTab, closeTab, searchTab];
 
 let data_arr = null;
 
@@ -61,6 +65,12 @@ const badgeHandler = (arr) => {
 
 
 
+
+
+
+
+
+
 const modalHandler = (issue_obj) => {
     modalBox.innerHTML = "";
     modalBox.innerHTML = `
@@ -92,7 +102,6 @@ const modalHandler = (issue_obj) => {
         </div>
     `;
 
-    console.log("modal active");
     
 }
 
@@ -230,8 +239,12 @@ function switchTab(activeBtn, activeTab) {
         tab.classList.add("hidden");
     });
 
-    activeBtn.classList.add("btn-primary", "text-white");
-    activeBtn.classList.remove("text-gray-500");
+    if (activeBtn.id !== "search-btn"){
+        activeBtn.classList.add("btn-primary", "text-white");
+        activeBtn.classList.remove("text-gray-500");
+    }
+
+    
 
     activeTab.classList.remove("hidden");
 }
@@ -252,4 +265,42 @@ openBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
     switchTab(closeBtn, closeTab);
     displayClosedIssue(data_arr);
+});
+
+const displaySearchIssue = (arr) => {
+    if (arr.length === 0){
+        searchTab.innerHTML = `<h1 class="text-2xl font-bold w-full">No issue found!</h1>`;
+        return
+    }
+    searchTab.innerHTML = ``;
+    let count = 0
+    for (let issue of arr) {
+        let newIssue = document.createElement("div");
+        
+        if (issue.status === "open"){
+            newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-green-500", "overflow-hidden");
+        }
+        else {
+            newIssue.classList.add("shadow", "rounded-2xl", "border-t-2", "border-purple-500", "overflow-hidden");
+        }
+        count += 1;
+        displayIssue(issue, newIssue);
+        searchTab.append(newIssue);
+    }
+    issueCount.innerHTML = String(count);    
+}
+
+
+
+searchBtn.addEventListener("click", () => {
+    let searchValue = searchTxt.value;
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then((res) => res.json())
+    .then((json) => {
+        switchTab(searchBtn, searchTab)
+        displaySearchIssue(json.data)
+        
+    }
+)
+    
 });

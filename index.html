@@ -68,8 +68,8 @@
 
             <div class="search flex items-center gap-1 relative">
                 <span class="absolute translate-x-1 translate-y-px"><i class="fa-brands fa-sistrix fa-sm" style="color: rgb(181, 190, 198);"></i></span>
-                <input type="text" class="w-75 h-11 border-2 border-gray-300 rounded-lg p-2.5" placeholder="   Search Issue">
-                <button class="btn btn-primary text-white"><i class="fa-solid fa-plus fa-sm" style="color: rgb(255, 255, 255);"></i>New Issue</button>
+                <input id="search-box" type="text" class="w-75 h-11 border-2 border-gray-300 rounded-lg py-2.5 px-4" placeholder="   Search Issue">
+                <button id="search-btn" class="btn btn-primary text-white"><i class="fa-solid fa-plus fa-sm" style="color: rgb(255, 255, 255);"></i>New Issue</button>
             </div>
         </nav>
 
@@ -105,6 +105,10 @@
 
                     <div id="close-tab" class="hidden grid grid-cols-4 gap-3">
                         close
+                    </div>
+
+                    <div id="search-tab" class="hidden grid grid-cols-4 gap-3">
+                        <h1 class="text-2xl font-bold w-full">No issue found!</h1>
                     </div>
                 </div>
             </div>
